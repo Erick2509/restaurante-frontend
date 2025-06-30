@@ -1,0 +1,124 @@
+.admin-welcome h1 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+.platos-section {
+  background-color: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  color: #f1f5f9;
+}
+
+.formulario-plato input,
+.formulario-plato select {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #94a3b8;
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+
+.guardar-btn {
+  background-color: #22c55e;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.guardar-btn:hover {
+  background-color: #16a34a;
+}
+
+.guardar-btn.cancelar {
+  background-color: #ef4444;
+}
+
+.guardar-btn.cancelar:hover {
+  background-color: #dc2626;
+}
+
+.tabla-platos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.tabla-platos th,
+.tabla-platos td {
+  border: 1px solid #334155;
+  padding: 10px;
+  text-align: left;
+}
+
+.tabla-platos th {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+.tabla-platos tr:nth-child(even) {
+  background-color: #1e293b;
+}
+
+.btn-editar,
+.btn-eliminar {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.btn-editar {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #ef4444;
+  color: white;
+}
+
+.paginacion-manual {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.paginacion-manual button {
+  padding: 6px 12px;
+  background-color: #0ea5e9;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.paginacion-manual button:disabled {
+  background-color: #64748b;
+  cursor: not-allowed;
+}
+
+.toast {
+  background-color: #334155;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 10px 0;
+  color: #38bdf8;
+}
+.error {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}

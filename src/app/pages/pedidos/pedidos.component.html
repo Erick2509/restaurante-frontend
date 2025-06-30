@@ -1,0 +1,81 @@
+<div class="admin-welcome">
+  <h1>Pedidos Realizados</h1>
+</div>
+
+<div *ngIf="mensaje" class="toast">{{ mensaje }}</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Total</th>
+      <th>Método de Pago</th>
+      <th>Estado</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pedido of pedidos">
+      <td>{{ pedido.id }}</td>
+      <td>S/ {{ pedido.total | number : "1.2-2" }}</td>
+      <td>{{ pedido.metodoPago }}</td>
+      <td>{{ pedido.estado }}</td>
+      <td>{{ pedido.fechaRegistro | date : "dd/MM/yyyy HH:mm" }}</td>
+      <td>
+        <button (click)="verDetalle(pedido)">Ver detalle</button>
+        <br /><br />
+        <select [(ngModel)]="pedido.estado">
+          <option value="Pendiente">Pendiente</option>
+          <option value="En Proceso">En Proceso</option>
+          <option value="Listo">Listo</option>
+          <option value="Entregado">Entregado</option>
+        </select>
+        <button (click)="cambiarEstado(pedido)">Actualizar estado</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal estilizado para detalle del pedido -->
+<div *ngIf="mostrarDetalle" class="modal-overlay">
+  <div class="modal-content">
+    <h2>🧾 Detalle del Pedido #{{ pedidoSeleccionadoId }}</h2>
+
+    <div class="modal-section">
+      <p><strong>📦 Tipo de entrega:</strong> {{ pedidoSeleccionado?.tipoEntrega }}</p>
+      <p><strong>📅 Fecha:</strong> {{ pedidoSeleccionado?.fechaRegistro | date: 'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+
+    <div class="modal-section">
+      <h4>🍽 Platos solicitados</h4>
+      <table class="tabla-detalle">
+        <thead>
+          <tr>
+            <th>Plato</th>
+            <th>Cantidad</th>
+            <th>Precio (S/)</th>
+            <th>Subtotal (S/)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of detallePedido">
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.precio | number: '1.2-2' }}</td>
+            <td><strong>{{ (item.precio * item.cantidad) | number: '1.2-2' }}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="modal-section total">
+      <strong>Total: S/ {{ calcularTotalDetalle() | number: '1.2-2' }}</strong>
+    </div>
+
+    <div class="modal-footer">
+      <button (click)="cerrarDetalle()">❌ Cerrar</button>
+    </div>
+  </div>
+</div>
+

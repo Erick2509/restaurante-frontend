@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Listado de Clientes</h2>
+  
+    <div *ngIf="cargando">Cargando clientes...</div>
+  
+    <table *ngIf="!cargando && clientes.length > 0">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Fecha de registro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{ cliente.nombre }} {{ cliente.apellido }}</td>
+          <td>{{ cliente.correo }}</td>
+          <td>{{ cliente.telefono }}</td>
+          <td>{{ cliente.creadoEn?.toDate() | date:'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="!cargando && clientes.length === 0">
+      No hay clientes registrados.
+    </div>
+  </div>
+  

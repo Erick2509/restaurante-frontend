@@ -1,0 +1,68 @@
+<div class="admin-welcome">
+  <h1>Gestión de Mesa</h1>
+</div>
+
+<div class="mesa-section">
+  <h3>{{ editando ? 'Editar mesa' : 'Agregar nueva mesa' }}</h3>
+
+  <div class="formulario-mesa">
+    <input [(ngModel)]="nuevaMesa.numero" placeholder="Número de mesa" type="number" min="1" required />
+    <div *ngIf="formInvalido && !nuevaMesa.numero" class="error">Ingrese el número de mesa</div>
+
+    <input [(ngModel)]="nuevaMesa.capacidad" placeholder="Capacidad" type="number" min="1" required />
+    <div *ngIf="formInvalido && !nuevaMesa.capacidad" class="error">Ingrese la capacidad</div>
+
+    <select [(ngModel)]="nuevaMesa.estado" required>
+      <option value="" disabled selected>Seleccione estado</option>
+      <option value="libre">Libre</option>
+      <option value="ocupada">Ocupada</option>
+      <option value="reservada">Reservada</option>
+    </select>
+    <div *ngIf="formInvalido && !nuevaMesa.estado" class="error">Seleccione un estado</div>
+
+    <div class="botones-formulario">
+      <button class="guardar-btn" (click)="guardar()">
+        {{ editando ? 'Actualizar' : 'Guardar' }}
+      </button>
+      <button *ngIf="editando" class="guardar-btn cancelar" (click)="cancelarEdicion()">Cancelar</button>
+    </div>
+  </div>
+
+  <div *ngIf="mensaje" class="toast">{{ mensaje }}</div>
+
+  <h2>Listado de Mesas</h2>
+
+  <table class="tabla-mesas">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Número</th>
+        <th>Capacidad</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mesa of mesas">
+        <td>{{ mesa.id }}</td>
+        <td>{{ mesa.numero }}</td>
+        <td>{{ mesa.capacidad }}</td>
+        <td>{{ mesa.estado }}</td>
+        <td>
+          <button class="btn-editar" (click)="editar(mesa)">Editar</button>
+          <button class="btn-eliminar" (click)="abrirModalEliminar(mesa)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal de confirmación -->
+  <div class="modal" *ngIf="mostrarModal">
+    <div class="modal-contenido">
+      <h3>¿Eliminar mesa?</h3>
+      <p>Esta acción no se puede deshacer.</p>
+      <button (click)="confirmarEliminar()" class="btn-eliminar">Sí, eliminar</button>
+      <button (click)="cancelarEliminar()" class="btn-cancelar">Cancelar</button>
+    </div>
+  </div>
+</div>

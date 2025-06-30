@@ -1,0 +1,33 @@
+<div class="admin-login-container">
+  <div class="admin-login-box">
+    <h2>Login Administrador</h2>
+    <h3>Ingrese sus credenciales</h3>
+
+    <form (ngSubmit)="iniciarSesion()" #form="ngForm">
+      <input
+        type="text"
+        id="username"
+        name="username"
+        [(ngModel)]="username"
+        placeholder="Usuario"
+        required
+      />
+
+      <input
+        type="password"
+        id="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Contraseña"
+        required
+      />
+
+      <p class="hint">La contraseña debe tener mayúsculas</p>
+      <button type="submit">Ingresar</button>
+    </form>
+
+    <div *ngIf="mensaje" class="error-msg">
+      {{ mensaje }}
+    </div>
+  </div>
+</div>

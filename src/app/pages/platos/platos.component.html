@@ -1,0 +1,80 @@
+<div class="admin-welcome">
+  <h1>Gestión de Platos</h1>
+</div>
+
+<div class="platos-section">
+  <h3>{{ editando ? "Editar plato" : "Agregar nuevo plato" }}</h3>
+
+  <form #platoForm="ngForm" class="formulario-plato" novalidate>
+
+    <input [(ngModel)]="nuevoPlato.nombre" name="nombre" placeholder="Nombre" required #nombre="ngModel" />
+    <div *ngIf="nombre.invalid && nombre.touched" class="error">⚠️ El nombre es obligatorio</div>
+
+    <input [(ngModel)]="nuevoPlato.descripcion" name="descripcion" placeholder="Descripción" required #descripcion="ngModel" />
+    <div *ngIf="descripcion.invalid && descripcion.touched" class="error">⚠️ La descripción es obligatoria</div>
+
+    <input [(ngModel)]="nuevoPlato.precio" name="precio" type="number" placeholder="Precio" required min="0.01" #precio="ngModel" />
+    <div *ngIf="precio.invalid && precio.touched" class="error">⚠️ Ingrese un precio válido (mayor a 0)</div>
+
+    <select [(ngModel)]="nuevoPlato.categoria" name="categoria" required #categoria="ngModel">
+      <option value="" disabled>Seleccione categoría</option>
+      <option value="Entrada">Entrada</option>
+      <option value="Fondo">Fondo</option>
+      <option value="Bebida">Bebida</option>
+      <option value="Postre">Postre</option>
+    </select>
+    <div *ngIf="categoria.invalid && categoria.touched" class="error">⚠️ Seleccione una categoría</div>
+
+    <input type="file" (change)="onFileSelected($event)" />
+
+    <img *ngIf="vistaPrevia" [src]="vistaPrevia" width="100" style="margin-top: 10px;" />
+    <div *ngIf="vistaPrevia" style="color: #4ade80; font-size: 14px;">✅ Imagen cargada correctamente</div>
+    <div *ngIf="!vistaPrevia && selectedFile" style="color: #f87171; font-size: 14px;">⚠️ Imagen no válida</div>
+
+    <div class="botones-formulario">
+      <button (click)="guardar()" class="guardar-btn"
+              [disabled]="!platoForm.valid || (!editando && !vistaPrevia)">
+        {{ editando ? "Actualizar" : "Guardar" }}
+      </button>
+      <button *ngIf="editando" (click)="cancelarEdicion()" class="guardar-btn cancelar">Cancelar</button>
+    </div>
+  </form>
+
+  <div *ngIf="mensaje" class="toast">{{ mensaje }}</div>
+
+  <h2>Listado de Platos</h2>
+
+  <table class="tabla-platos">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Categoría</th>
+        <th>Imagen</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let plato of platos.slice((paginaActual - 1) * platosPorPagina, paginaActual * platosPorPagina)">
+        <td>{{ plato.id }}</td>
+        <td><strong>{{ plato.nombre }}</strong></td>
+        <td>{{ plato.descripcion }}</td>
+        <td>S/ {{ plato.precio }}</td>
+        <td>{{ plato.categoria }}</td>
+        <td><img *ngIf="plato.imagenUrl" [src]="plato.imagenUrl" width="60" /></td>
+        <td>
+          <button class="btn-editar" (click)="editar(plato)">Editar</button>
+          <button class="btn-eliminar" (click)="eliminar(plato.id!)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="paginacion-manual">
+    <button (click)="paginaAnterior()" [disabled]="paginaActual === 1">Anterior</button>
+    <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+    <button (click)="paginaSiguiente()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+  </div>
+</div>

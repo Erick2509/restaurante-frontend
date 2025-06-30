@@ -1,0 +1,93 @@
+<div class="admin-welcome">
+  <h1>Gestión de Empleados</h1>
+</div>
+
+<div class="empleados-section">
+  <h3>{{ editando ? 'Editar empleado' : 'Agregar nuevo empleado' }}</h3>
+
+  <div class="formulario-empleado">
+    <form #empleadoForm="ngForm" (ngSubmit)="guardar()" novalidate>
+      <input [(ngModel)]="nuevoEmpleado.nombre" name="nombre" placeholder="Nombre" required />
+      <div *ngIf="empleadoForm.submitted && !empleadoForm.controls['nombre']?.valid" class="error-msg">* Nombre requerido</div>
+
+      <input [(ngModel)]="nuevoEmpleado.apellido" name="apellido" placeholder="Apellido" required />
+      <div *ngIf="empleadoForm.submitted && !empleadoForm.controls['apellido']?.valid" class="error-msg">* Apellido requerido</div>
+
+      <input [(ngModel)]="nuevoEmpleado.dni" name="dni" placeholder="DNI" required pattern="^[0-9]{8}$" maxlength="8" />
+      <div *ngIf="empleadoForm.submitted && !empleadoForm.controls['dni']?.valid" class="error-msg">* DNI de 8 dígitos numéricos</div>
+
+      <input [(ngModel)]="nuevoEmpleado.telefono" name="telefono" placeholder="Teléfono" required pattern="^[0-9]{9}$" maxlength="9" />
+      <div *ngIf="empleadoForm.submitted && !empleadoForm.controls['telefono']?.valid" class="error-msg">* Teléfono de 9 dígitos</div>
+
+      <select [(ngModel)]="nuevoEmpleado.cargo" name="cargo" required>
+        <option value="" disabled>Seleccione cargo</option>
+        <option value="Mozo">Mozo</option>
+        <option value="Chef">Chef</option>
+        <option value="Administrador">Administrador</option>
+      </select>
+      <div *ngIf="empleadoForm.submitted && !empleadoForm.controls['cargo']?.valid" class="error-msg">* Cargo obligatorio</div>
+
+      <select [(ngModel)]="nuevoEmpleado.estado" name="estado" required>
+        <option value="" disabled>Seleccione estado</option>
+        <option value="disponible">Disponible</option>
+        <option value="ocupado">Ocupado</option>
+      </select>
+      <div *ngIf="empleadoForm.submitted && !empleadoForm.controls['estado']?.valid" class="error-msg">* Estado obligatorio</div>
+
+      <div class="botones-formulario">
+        <button class="guardar-btn" type="submit">
+          {{ editando ? 'Actualizar' : 'Guardar' }}
+        </button>
+        <button *ngIf="editando" type="button" class="guardar-btn cancelar" (click)="cancelarEdicion()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="mensaje" class="toast">{{ mensaje }}</div>
+
+  <h2>Listado de Empleados</h2>
+
+  <table class="tabla-empleados">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>DNI</th>
+        <th>Teléfono</th>
+        <th>Cargo</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let empleado of empleados">
+        <td>{{ empleado.id }}</td>
+        <td>{{ empleado.nombre }}</td>
+        <td>{{ empleado.apellido }}</td>
+        <td>{{ empleado.dni }}</td>
+        <td>{{ empleado.telefono }}</td>
+        <td>{{ empleado.cargo }}</td>
+        <td>{{ empleado.estado }}</td>
+        <td>
+          <button class="btn-editar" (click)="editar(empleado)">Editar</button>
+          <button class="btn-eliminar" (click)="abrirModalEliminar(empleado)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal de Confirmación de Eliminación -->
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal-contenido">
+    <h2>¿Eliminar empleado?</h2>
+    <p>Esta acción no se puede deshacer.</p>
+    <div class="modal-botones">
+      <button class="btn-eliminar-confirmado" (click)="confirmarEliminar()">Sí, eliminar</button>
+      <button class="btn-cancelar" (click)="cancelarEliminar()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+

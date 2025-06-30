@@ -1,0 +1,250 @@
+body {
+  background-color: #121c2a;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.titulo {
+  text-align: center;
+  padding: 16px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.formulario {
+  background-color: #1f2c3c;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+.select-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+select, input[type="number"] {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f2f2f2;
+  color: #333;
+  min-width: 150px;
+}
+
+select:focus, input[type="number"]:focus {
+  outline: 2px solid #3498db;
+}
+
+.platos-scrollable {
+  max-height: 260px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  border: 1px solid #2c3e50;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #16232f;
+}
+
+.plato-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+  gap: 10px;
+  border-bottom: 1px dashed #34495e;
+  padding-bottom: 6px;
+}
+
+.plato-item label {
+  flex: 1;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 13px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button.agregar {
+  background-color: #2980b9;
+  color: white;
+}
+
+button.guardar {
+  background-color: #2ecc71;
+  color: white;
+  margin-top: 10px;
+  width: 100%;
+}
+
+button.eliminar {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.mensaje {
+  margin-top: 12px;
+  font-weight: bold;
+  color: #f1c40f;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+th, td {
+  border: 1px solid #34495e;
+  padding: 10px;
+  text-align: center;
+  background-color: #1c2a3a;
+}
+
+th {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+}
+
+.estado {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.estado.pendiente {
+  background-color: #f39c12;
+  color: white;
+}
+
+.estado.en-proceso {
+  background-color: #3498db;
+  color: white;
+}
+
+.estado.listo {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.estado.entregado {
+  background-color: #9b59b6;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .select-group, .plato-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .formulario {
+    margin: 10px;
+    padding: 16px;
+  }
+
+  button.guardar {
+    font-size: 16px;
+  }
+}
+input.buscador {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f2f2f2;
+  color: #333;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #272626;
+  padding: 24px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-section {
+  margin-bottom: 16px;
+}
+
+.modal-footer {
+  text-align: right;
+}
+
+.modal-footer button {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-footer button:hover {
+  background-color: #c82333;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.tabla-detalle {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tabla-detalle th,
+.tabla-detalle td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #444;
+}
+
+.tabla-detalle th {
+  background-color: #3a3a3a;
+  font-weight: bold;
+}
+
